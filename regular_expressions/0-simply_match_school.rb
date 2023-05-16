@@ -1,2 +1,2 @@
 #!/usr/bin/env ruby
-.scan(/School/)
+(\wSchool+/)
