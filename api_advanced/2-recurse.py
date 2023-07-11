@@ -8,7 +8,6 @@ import sys
 
 
 def add_title(hot_list, hot_posts):
-    """ Adds item into a list """
     if len(hot_posts) == 0:
         return
     hot_list.append(hot_posts[0]['data']['title'])
@@ -37,8 +36,9 @@ def recurse(subreddit, hot_list=[], after=None):
 
     reddit = response.json()
     hot_posts = reddit['data']['children']
-    add_title(hot_list, hot_posts)
-    after = reddit['data']['after']
-    if not after:
+    for hot in hot_posts:
+        hot_list.append(post['data']['title'])
+    if not hot_posts['data']['after']:
         return hot_list
-    return recurse(subreddit, hot_list=hot_list, after=after)
+    else:
+        return recurse(subreddit, hot_list, after=hot_posts['data']['after'])
