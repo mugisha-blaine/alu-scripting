@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Querry for the reddit api and parse the title of all hot articles
+"""Query for the reddit api and parse the title of all hot articles
 """
 
 import json
@@ -12,13 +12,13 @@ def count_words(subreddit, word_list, after="", count=[]):
         count = [0] * len(word_list)
 
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    response = requests.get(url,
-                            params={'after': after},
-                            allow_redirects=False,
-                            headers={'user-agent': 'bhalut'})
+    request = requests.get(url,
+                           params={'after': after},
+                           allow_redirects=False,
+                           headers={'user-agent': 'bhalut'})
 
-    if response.status_code == 200:
-        data = response.json()
+    if request.status_code == 200:
+        data = request.json()
 
         for topic in (data['data']['children']):
             for word in topic['data']['title'].split():
